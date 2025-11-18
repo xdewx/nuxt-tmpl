@@ -11,9 +11,17 @@ export default defineNuxtConfig({
     "@nuxt/test-utils",
     "@pinia/nuxt",
     "@nuxtjs/i18n",
+    // "dayjs-nuxt",
+    "@element-plus/nuxt",
+    // "@nuxtjs/stylelint-module",
+    "@vueuse/nuxt",
+    "nuxt-lodash",
   ],
 
   i18n: {
     defaultLocale: "zh-CN",
+  },
+  eslint: {
+    config: {},
   },
 });
