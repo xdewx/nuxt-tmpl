@@ -15,3 +15,4 @@ always use the latest version of Nuxt
 - [x] lodash
 - [x] unplugin-icons
 - [x] vue3-context-menu
+- [x] husky & commitlint

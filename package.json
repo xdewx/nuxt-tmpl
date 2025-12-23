@@ -10,7 +10,10 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "prepare": "husky"
   },
   "dependencies": {
     "@imengyu/vue3-context-menu": "^1.5.2",
@@ -26,6 +29,8 @@
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.2.0",
+    "@commitlint/config-conventional": "^20.2.0",
     "@element-plus/nuxt": "^1.1.4",
     "@iconify-json/line-md": "^1.2.11",
     "@nuxtjs/i18n": "^10.2.0",
@@ -33,6 +38,7 @@
     "@pinia/nuxt": "^0.11.2",
     "@unocss/nuxt": "^66.5.9",
     "@vueuse/nuxt": "^14.0.0",
+    "husky": "^9.1.7",
     "sass-embedded": "^1.93.3",
     "unocss": "^66.5.9",
     "unplugin-auto-import": "^20.3.0",
