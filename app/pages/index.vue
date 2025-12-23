@@ -2,8 +2,10 @@
   <div class="relative">
     <div class="absolute top-20px left-0 right-0 mx-auto color-white w-400px">
       <div class="feature">
-        <el-tag type="primary" class="feature-name">unplugin-icons</el-tag
-        ><el-icon size="24" color="red"><LineMdIconify2Static /></el-icon>
+        <el-tag type="primary" class="feature-name">unplugin-icons</el-tag>
+        <ClientOnly>
+          <el-icon size="24" color="red"><LineMdIconify2Static /></el-icon>
+        </ClientOnly>
       </div>
       <div class="feature">
         <el-tag type="primary" class="feature-name">i18n</el-tag
