@@ -4,7 +4,15 @@ import ViteComponents from "unplugin-vue-components/vite";
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  ssr: true,
+  ssr: false,
+  app: {
+    baseURL: ".",
+  },
+  router: {
+    options: {
+      hashMode: true,
+    },
+  },
   vite: {
     plugins: [
       ViteComponents({
