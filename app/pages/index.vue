@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <div class="absolute top-20px left-0 right-0 mx-auto color-white w-400px">
+    <div class="absolute top-20px left-0 right-0 mx-auto w-400px">
       <div class="feature">
         <el-tag type="primary" class="feature-name">unplugin-icons</el-tag>
         <ClientOnly>
@@ -16,9 +16,12 @@
           >contextmenu</el-tag
         >
       </div>
+      <div class="feature">
+        <el-switch v-model="isDark" active-text="dark" inactive-text="light" />
+      </div>
     </div>
     <NuxtRouteAnnouncer />
-    <NuxtWelcome />
+    <NuxtWelcome :class="[isDark ? 'bg-black!' : 'bg-white!']" />
   </div>
 </template>
 
@@ -26,7 +29,7 @@
 import LineMdIconify2Static from "~icons/line-md/iconify2-static";
 import { useContextMenu } from "~/composables/context-menu";
 const { t } = useI18n();
-
+const isDark = useDark();
 const onContextMenu = (e: MouseEvent) => {
   useContextMenu(e, {
     items: [

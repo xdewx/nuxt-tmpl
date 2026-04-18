@@ -14,18 +14,12 @@ importers:
       '@ipa-schema/api':
         specifier: ^0.0.13
         version: 0.0.13
-      '@nuxt/eslint':
-        specifier: 1.10.0
-        version: 1.10.0(@typescript-eslint/utils@8.58.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.32)(eslint@9.39.4(jiti@2.6.1))(magicast@0.5.2)(typescript@5.9.3)(vite@7.3.2(@types/node@25.6.0)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(yaml@2.8.3))
       '@nuxt/icon':
         specifier: 2.1.0
         version: 2.1.0(magicast@0.5.2)(vite@7.3.2(@types/node@25.6.0)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(yaml@2.8.3))(vue@3.5.32(typescript@5.9.3))
       '@nuxt/image':
         specifier: 1.11.0
         version: 1.11.0(db0@0.3.4(@electric-sql/pglite@0.4.1)(better-sqlite3@12.8.0)(mysql2@3.15.3))(ioredis@5.10.1)(magicast@0.5.2)(srvx@0.11.15)
-      '@nuxt/test-utils':
-        specifier: 3.20.1
-        version: 3.20.1(magicast@0.5.2)(typescript@5.9.3)
       '@prisma/adapter-better-sqlite3':
         specifier: ^7.7.0
         version: 7.7.0
@@ -38,9 +32,6 @@ importers:
       dotenv:
         specifier: ^17.4.2
         version: 17.4.2
-      eslint:
-        specifier: ^9.39.4
-        version: 9.39.4(jiti@2.6.1)
       lodash-es:
         specifier: ^4.18.1
         version: 4.18.1
@@ -66,6 +57,12 @@ importers:
       '@iconify-json/line-md':
         specifier: ^1.2.16
         version: 1.2.16
+      '@nuxt/eslint':
+        specifier: 1.10.0
+        version: 1.10.0(@typescript-eslint/utils@8.58.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.32)(eslint@9.39.4(jiti@2.6.1))(magicast@0.5.2)(typescript@5.9.3)(vite@7.3.2(@types/node@25.6.0)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(yaml@2.8.3))
+      '@nuxt/test-utils':
+        specifier: 3.20.1
+        version: 3.20.1(magicast@0.5.2)(typescript@5.9.3)
       '@nuxtjs/i18n':
         specifier: ^10.2.4
         version: 10.2.4(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@vue/compiler-dom@3.5.32)(db0@0.3.4(@electric-sql/pglite@0.4.1)(better-sqlite3@12.8.0)(mysql2@3.15.3))(eslint@9.39.4(jiti@2.6.1))(ioredis@5.10.1)(magicast@0.5.2)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3)))(rollup@4.60.1)(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3))
@@ -90,6 +87,9 @@ importers:
       '@vueuse/nuxt':
         specifier: ^14.2.1
         version: 14.2.1(magicast@0.5.2)(nuxt@4.4.2(@babel/core@7.29.0)(@babel/plugin-syntax-jsx@7.28.6(@babel/core@7.29.0))(@electric-sql/pglite@0.4.1)(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@parcel/watcher@2.5.6)(@types/node@25.6.0)(@vue/compiler-sfc@3.5.32)(better-sqlite3@12.8.0)(cac@6.7.14)(db0@0.3.4(@electric-sql/pglite@0.4.1)(better-sqlite3@12.8.0)(mysql2@3.15.3))(eslint@9.39.4(jiti@2.6.1))(ioredis@5.10.1)(magicast@0.5.2)(meow@13.2.0)(mysql2@3.15.3)(optionator@0.9.4)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3)))(rollup-plugin-visualizer@7.0.1(rollup@4.60.1))(rollup@4.60.1)(sass-embedded@1.99.0)(sass@1.99.0)(srvx@0.11.15)(stylelint@16.25.0(typescript@5.9.3))(terser@5.46.1)(typescript@5.9.3)(vite@7.3.2(@types/node@25.6.0)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(yaml@2.8.3))(yaml@2.8.3))(vue@3.5.32(typescript@5.9.3))
+      eslint:
+        specifier: ^9.39.4
+        version: 9.39.4(jiti@2.6.1)
       husky:
         specifier: ^9.1.7
         version: 9.1.7
