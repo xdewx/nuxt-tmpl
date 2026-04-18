@@ -1,14 +1,38 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import IconsResolver from "unplugin-icons/resolver";
 import ViteComponents from "unplugin-vue-components/vite";
+import typescript from "@rollup/plugin-typescript";
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   ssr: false,
-  app: {
-    // baseURL: ".",
+  app: {},
+  runtimeConfig: {},
+  appConfig: {},
+  build: {
+    transpile: [],
   },
-  nitro: {},
+  nitro: {
+    externals: {},
+    ignore: [],
+    imports: {
+      exclude: [],
+    },
+    rollupConfig: {
+      plugins: [
+        // typescript({})
+      ],
+    },
+  },
+  imports: {
+    scan: false,
+    presets: [],
+    dirs: [],
+  },
+  components: {
+    dirs: [],
+  },
   router: {
     options: {
       hashMode: true,

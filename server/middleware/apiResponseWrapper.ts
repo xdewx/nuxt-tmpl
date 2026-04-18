@@ -1,26 +1,73 @@
 import type { ApiResponse } from "@ipa-schema/api";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export default defineEventHandler((event) => {
-  if (!event.path.startsWith("/api/")) return;
+const isApiPath = (path: string | undefined) =>
+  typeof path === "string" && path.startsWith("/api/");
+
+const parseJsonIfNeeded = (
+  body: unknown,
+  contentType?: string | null,
+): unknown => {
+  if (typeof body !== "string") return body;
+  if (!contentType?.includes("application/json")) return body;
+
+  const trimmed = body.trim();
+  if (!trimmed || (trimmed[0] !== "{" && trimmed[0] !== "[")) {
+    return body;
+  }
+
+  try {
+    return JSON.parse(trimmed);
+  } catch {
+    return body;
+  }
+};
+
+const isAlreadyWrappedResponse = (
+  body: unknown,
+): body is ApiResponse<unknown> => {
+  return body !== null && typeof body === "object" && "success" in body;
+};
+
+const apiResponseWrapper = defineEventHandler((event) => {
+  if (!isApiPath(event.path)) return;
 
   const res = event.node.res;
-  const originalEnd = res.end;
+  const originalEnd = res.end.bind(res);
 
-  res.end = function (
-    chunk?: any,
-    encoding?: string | (() => void),
-    cb?: () => void,
-  ) {
+  res.end = function (chunk?: any, encoding?: any, cb?: any) {
+    if (typeof chunk === "function") {
+      cb = chunk;
+      chunk = undefined;
+      encoding = undefined;
+    }
+
+    let body = chunk;
+    if (Buffer.isBuffer(body)) {
+      body = body.toString("utf8");
+    }
+
+    const contentType = res.getHeader("content-type");
+    body = parseJsonIfNeeded(body, contentType as string | null);
+
+    if (isAlreadyWrappedResponse(body)) {
+      return originalEnd(chunk, encoding, cb);
+    }
+
     const wrappedBody: ApiResponse<any> = {
-      data: chunk,
+      data: body,
       success: true,
     };
-    return originalEnd.call(
-      this,
-      JSON.stringify(wrappedBody),
-      encoding as any,
-      cb,
-    );
+
+    res.setHeader("content-type", "application/json; charset=utf-8");
+    return originalEnd(JSON.stringify(wrappedBody), encoding, cb);
   };
+});
+
+/**
+ * TODO: the middleware in nuxt seems different from other backend frameworks
+ */
+export default eventHandler({
+  onRequest: [],
+  onBeforeResponse: [],
+  handler: () => {},
 });
