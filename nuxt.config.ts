@@ -32,7 +32,8 @@ export default defineNuxtConfig({
   },
   appConfig: {},
   build: {
-    transpile: [],
+    // FIXME: not work
+    transpile: ["@ipa-schema/api"],
   },
   css: ["@/assets/index.css"],
   nitro: {

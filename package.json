@@ -17,12 +17,16 @@
     "better-auth:generate": "pnpm dlx auth@latest generate --config shared/utils/better-auth.ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:studio": "prisma studio"
+    "prisma:studio": "prisma studio",
+    "prisma:seed": "prisma db seed",
+    "prisma:migrated": "prisma migrate resolve --applied",
+    "vercel:link": "vercel link",
+    "vercel:deploy": "vercel deploy"
   },
   "dependencies": {
     "@clerk/nuxt": "^2.2.4",
     "@imengyu/vue3-context-menu": "^1.5.4",
-    "@ipa-schema/api": "^0.0.13",
+    "@ipa-schema/api": "^0.1.0",
     "@nuxt/icon": "2.1.0",
     "@nuxt/image": "1.11.0",
     "@prisma/adapter-better-sqlite3": "^7.7.0",
