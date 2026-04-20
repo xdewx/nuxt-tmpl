@@ -28,7 +28,10 @@ const isAlreadyWrappedResponse = (
   return body !== null && typeof body === "object" && "success" in body;
 };
 
-const apiResponseWrapper = defineEventHandler((event) => {
+/**
+ * @deprecated use `defineApiHandler` instead
+ */
+const _apiResponseWrapper = defineEventHandler((event) => {
   if (!isApiPath(event.path)) return;
 
   const res = event.node.res;

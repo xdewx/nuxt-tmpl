@@ -2,6 +2,13 @@ import { useAuth } from "@clerk/nuxt/composables";
 import { watch } from "vue";
 
 export default defineNuxtRouteMiddleware(async (to, _from) => {
+  const runtimeConfig = useRuntimeConfig();
+  if (!runtimeConfig.clerk.enabled) {
+    // console.info("clerk middleware disabled");
+    return;
+  }
+
+  // console.info("clerk middleware", to.path, _from.path);
   const { isLoaded, isSignedIn } = useAuth();
 
   if (!isLoaded.value) {

@@ -3,6 +3,8 @@ import IconsResolver from "unplugin-icons/resolver";
 import ViteComponents from "unplugin-vue-components/vite";
 import typescript from "@rollup/plugin-typescript";
 
+// console.info(process.env);
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
@@ -15,7 +17,19 @@ export default defineNuxtConfig({
     signInFallbackRedirectUrl: "/dashboard",
   },
   app: {},
-  runtimeConfig: {},
+  runtimeConfig: {
+    databaseUrl: process.env.DATABASE_URL,
+    baseUrl: process.env.BASE_URL,
+    clerk: {
+      enabled: process.env.ENABLE_CLERK === "1",
+      secretKey: process.env.NUXT_CLERK_SECRET_KEY,
+    },
+    betterAuth: {
+      enabled: process.env.ENABLE_BETTER_AUTH === "1",
+      secret: process.env.BETTER_AUTH_SECRET,
+      baseUrl: process.env.BETTER_AUTH_URL || process.env.BASE_URL,
+    },
+  },
   appConfig: {},
   build: {
     transpile: [],

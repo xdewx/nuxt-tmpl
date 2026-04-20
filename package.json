@@ -6,14 +6,15 @@
     "node": ">=21.0.0"
   },
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
+    "build": "nuxt build --dotenv .env --dotenv .env.production",
+    "dev": "nuxt dev --dotenv .env --dotenv .env.local",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "prepare": "husky",
+    "better-auth:generate": "pnpm dlx auth@latest generate --config shared/utils/better-auth.ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio"
@@ -26,6 +27,7 @@
     "@nuxt/image": "1.11.0",
     "@prisma/adapter-better-sqlite3": "^7.7.0",
     "@prisma/client": "^7.7.0",
+    "better-auth": "^1.6.5",
     "better-sqlite3": "^12.8.0",
     "dotenv": "^17.4.2",
     "lodash-es": "^4.18.1",
