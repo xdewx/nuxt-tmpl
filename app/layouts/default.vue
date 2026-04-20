@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col w-full h-full">
     <div class="border-b">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-10">
           <div class="flex-shrink-0">
             <el-link type="primary" href="/" class="text-lg font-bold">{{
@@ -48,7 +48,6 @@ import { useRoute, useRouter } from "vue-router";
 const { isLoaded, isSignedIn } = useAuth();
 const route = useRoute();
 const router = useRouter();
-
 watch(
   [() => isLoaded.value, () => isSignedIn.value],
   ([loaded, signedIn]) => {
