@@ -1,13 +1,14 @@
 <template>
   <div class="flex flex-col items-center">
-      <UserProfile v-if="isSignedIn"/>
+    <AuthUserProfile v-if="provider.isSignedIn.value" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { UserProfile } from "@clerk/nuxt/components";
-import { useAuth } from "@clerk/nuxt/composables";
-const { isSignedIn } = useAuth();
+import AuthUserProfile from "~/components/auth/AuthUserProfile.vue";
+import { useAuth } from "~/composables/useAuth";
+
+const provider = useAuth();
 </script>
 
 <style scoped></style>

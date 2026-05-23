@@ -9,21 +9,21 @@
             }}</el-link>
           </div>
           <nav class="flex items-center space-x-4">
-            <Show when="signed-out">
-              <SignInButton mode="modal">
-                <el-button size="small" type="primary">{{
-                  $t("signIn")
-                }}</el-button>
-              </SignInButton>
-              <SignUpButton mode="modal">
-                <el-button size="small" type="primary">{{
-                  $t("signUp")
-                }}</el-button>
-              </SignUpButton>
-            </Show>
-            <Show when="signed-in">
-              <UserButton />
-            </Show>
+            <template v-if="provider.id !== 'none'">
+              <template v-if="!provider.isSignedIn.value">
+                <AuthSignInButton>
+                  <el-button size="small" type="primary">{{
+                    $t("signIn")
+                  }}</el-button>
+                </AuthSignInButton>
+                <AuthSignUpButton>
+                  <el-button size="small" type="primary">{{
+                    $t("signUp")
+                  }}</el-button>
+                </AuthSignUpButton>
+              </template>
+              <AuthUserButton v-else />
+            </template>
           </nav>
         </div>
       </div>
@@ -34,27 +34,22 @@
   </div>
 </template>
 
-<script setup>
-import {
-  SignInButton,
-  SignUpButton,
-  UserButton,
-  Show,
-} from "@clerk/nuxt/components";
-import { useAuth } from "@clerk/nuxt/composables";
+<script setup lang="ts">
+import AuthSignInButton from "~/components/auth/AuthSignInButton.vue";
+import AuthSignUpButton from "~/components/auth/AuthSignUpButton.vue";
+import AuthUserButton from "~/components/auth/AuthUserButton.vue";
+import { useAuth } from "~/composables/useAuth";
 import { watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
-const { isLoaded, isSignedIn } = useAuth();
+const provider = useAuth();
 const route = useRoute();
 const router = useRouter();
+
 watch(
-  [() => isLoaded.value, () => isSignedIn.value],
+  [() => provider.isLoaded.value, () => provider.isSignedIn.value],
   ([loaded, signedIn]) => {
-    // console.info(loaded,signedIn,route.path)
-    if (!loaded) {
-      return;
-    }
+    if (!loaded) return;
 
     if (signedIn && route.path === "/") {
       router.push("/dashboard");

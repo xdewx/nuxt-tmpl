@@ -1,10 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import IconsResolver from "unplugin-icons/resolver";
 import ViteComponents from "unplugin-vue-components/vite";
-import typescript from "@rollup/plugin-typescript";
-
-// console.info(process.env);
-
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
@@ -17,25 +13,33 @@ export default defineNuxtConfig({
     signInFallbackRedirectUrl: "/dashboard",
   },
   app: {},
+
   runtimeConfig: {
     databaseUrl: process.env.DATABASE_URL,
-    baseUrl: process.env.BASE_URL,
     clerk: {
-      enabled: process.env.ENABLE_CLERK === "1",
       secretKey: process.env.NUXT_CLERK_SECRET_KEY,
     },
     betterAuth: {
-      enabled: process.env.ENABLE_BETTER_AUTH === "1",
       secret: process.env.BETTER_AUTH_SECRET,
-      baseUrl: process.env.BETTER_AUTH_URL || process.env.BASE_URL,
+    },
+    public: {
+      authProvider: process.env.NUXT_PUBLIC_AUTH_PROVIDER || "",
+      baseUrl: process.env.BASE_URL || "",
+      betterAuth: {
+        baseUrl: process.env.BETTER_AUTH_URL || process.env.BASE_URL || "",
+      },
     },
   },
+
   appConfig: {},
+
   build: {
     // FIXME: not work
     transpile: ["@ipa-schema/api"],
   },
+
   css: ["@/assets/style/index.css"],
+
   nitro: {
     externals: {},
     ignore: [],
@@ -43,24 +47,26 @@ export default defineNuxtConfig({
       exclude: [],
     },
     rollupConfig: {
-      plugins: [
-        // typescript({})
-      ],
+      plugins: [],
     },
   },
+
   imports: {
     scan: false,
     presets: [],
     dirs: [],
   },
+
   components: {
     dirs: [],
   },
+
   router: {
     options: {
       hashMode: false,
     },
   },
+
   vite: {
     plugins: [
       ViteComponents({
@@ -69,7 +75,7 @@ export default defineNuxtConfig({
     ],
     optimizeDeps: {
       include: [
-        "dayjs", // CJS
+        "dayjs",
         "dayjs/plugin/*.js",
         "lodash-unified",
         "@vue/devtools-core",
@@ -78,8 +84,11 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   modules: [
-    "@clerk/nuxt",
+    ...(process.env.NUXT_PUBLIC_AUTH_PROVIDER === "clerk"
+      ? ["@clerk/nuxt"]
+      : []),
     "@nuxt/eslint",
     "@nuxt/icon",
     "@nuxt/image",
@@ -87,7 +96,6 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxtjs/i18n",
     "@element-plus/nuxt",
-    // "@nuxtjs/stylelint-module",
     "@vueuse/nuxt",
     [
       "unplugin-icons/nuxt",
@@ -97,6 +105,7 @@ export default defineNuxtConfig({
     ],
     "@unocss/nuxt",
   ],
+
   i18n: {
     defaultLocale: "zh-CN",
     locales: [
@@ -112,7 +121,9 @@ export default defineNuxtConfig({
       },
     ],
   },
+
   eslint: {
     config: {},
   },
 });
+
