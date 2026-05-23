@@ -28,6 +28,10 @@ export default defineNuxtConfig({
       betterAuth: {
         baseUrl: process.env.BETTER_AUTH_URL || process.env.BASE_URL || "",
       },
+      supabase: {
+        url: process.env.NUXT_PUBLIC_SUPABASE_URL || "",
+        anonKey: process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY || "",
+      },
     },
   },
 
@@ -81,6 +85,7 @@ export default defineNuxtConfig({
         "@vue/devtools-core",
         "@vue/devtools-kit",
         "@imengyu/vue3-context-menu",
+        "@supabase/ssr",
       ],
     },
   },

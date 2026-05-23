@@ -17,14 +17,23 @@ export async function createAuthProvider(): Promise<AuthProvider> {
 
   console.log(provider);
 
-  if (provider === "clerk") {
-    const { createClerkProvider } = await import("./clerk");
-    return createClerkProvider();
-  }
+  try {
+    if (provider === "clerk") {
+      const { createClerkProvider } = await import("./clerk");
+      return createClerkProvider();
+    }
 
-  if (provider === "better-auth") {
-    const { createBetterAuthProvider } = await import("./better-auth");
-    return createBetterAuthProvider();
+    if (provider === "better-auth") {
+      const { createBetterAuthProvider } = await import("./better-auth");
+      return createBetterAuthProvider();
+    }
+
+    if (provider === "supabase") {
+      const { createSupabaseProvider } = await import("./supabase");
+      return createSupabaseProvider();
+    }
+  } catch (e) {
+    console.error(`Failed to initialize auth provider "${provider}":`, e);
   }
 
   return createNoopProvider();
