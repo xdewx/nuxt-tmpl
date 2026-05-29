@@ -1,3 +1,4 @@
+import { negativeApiResponse, toApiError } from "@ipa-schema/api"
 import type { AuthProvider } from './types'
 
 declare const __AUTH_PROVIDER__: string | undefined;
@@ -47,11 +48,11 @@ function createNoopProvider(): AuthProvider {
     isSignedIn: ref(false),
 
     async signIn() {
-      return { success: false, error: 'No auth provider enabled' }
+      return negativeApiResponse(toApiError('No auth provider enabled'))
     },
 
     async signUp() {
-      return { success: false, error: 'No auth provider enabled' }
+      return negativeApiResponse(toApiError('No auth provider enabled'))
     },
 
     async signOut() {},

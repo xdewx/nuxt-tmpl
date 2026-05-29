@@ -1,3 +1,4 @@
+import { positiveApiResponse } from "@ipa-schema/api";
 import type { ApiResponse } from "@ipa-schema/api";
 
 const isApiPath = (path: string | undefined) =>
@@ -56,10 +57,9 @@ const _apiResponseWrapper = defineEventHandler((event) => {
       return originalEnd(chunk, encoding, cb);
     }
 
-    const wrappedBody: ApiResponse<any> = {
+    const wrappedBody: ApiResponse<any> = positiveApiResponse({
       data: body,
-      success: true,
-    };
+    });
 
     res.setHeader("content-type", "application/json; charset=utf-8");
     return originalEnd(JSON.stringify(wrappedBody), encoding, cb);

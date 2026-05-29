@@ -1,5 +1,6 @@
 import { createAuthClient } from "better-auth/vue";
 import type { AuthProvider } from "./types";
+import { positiveApiResponse, negativeApiResponse, toApiError } from "@ipa-schema/api";
 import type {
   AuthUser,
   AuthResult,
@@ -40,12 +41,8 @@ export function createBetterAuthProvider(): AuthProvider {
 
     async signIn(data: AuthSignInData): Promise<AuthResult> {
       const { error } = await client.signIn.email(data);
-      if (error)
-        return {
-          success: false as const,
-          error: error.message ?? "Unknown error",
-        };
-      return { success: true as const };
+      if (error) return negativeApiResponse(toApiError(error));
+      return positiveApiResponse({});
     },
 
     async signUp(data: AuthSignUpData): Promise<AuthResult> {
@@ -53,12 +50,8 @@ export function createBetterAuthProvider(): AuthProvider {
         ...data,
         name: data.name ?? "",
       });
-      if (error)
-        return {
-          success: false as const,
-          error: error.message ?? "Unknown error",
-        };
-      return { success: true as const };
+      if (error) return negativeApiResponse(toApiError(error));
+      return positiveApiResponse({});
     },
 
     async signOut(): Promise<void> {
@@ -74,4 +67,3 @@ export function createBetterAuthProvider(): AuthProvider {
     openUserProfile: async () => { await navigateTo("/profile") },
   };
 }
-

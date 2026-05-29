@@ -1,3 +1,5 @@
+import type { ApiResponse } from "@ipa-schema/api"
+
 export type AuthProviderId = 'clerk' | 'better-auth' | 'supabase'
 
 export interface AuthUser {
@@ -23,6 +25,4 @@ export interface AuthSignUpData extends AuthSignInData {
   name?: string
 }
 
-export type AuthResult =
-  | { success: true; redirectTo?: string }
-  | { success: false; error: string }
+export type AuthResult = ApiResponse

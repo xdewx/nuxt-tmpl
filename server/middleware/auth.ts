@@ -1,5 +1,4 @@
 import { isSafeRoute } from "#shared/utils/route";
-
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
   const providerId = config.public?.authProvider;
@@ -29,9 +28,12 @@ export default defineEventHandler(async (event) => {
   }
 
   if (providerId === "supabase") {
-    const { createServerSupabaseClient } = await import("#shared/utils/supabase");
+    const { createServerSupabaseClient } =
+      await import("#shared/utils/supabase");
     const supabase = createServerSupabaseClient(event);
-    const { data: { session } } = await supabase.auth.getSession();
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
     if (session) return;
 
     if (event.path.startsWith("/api/")) {

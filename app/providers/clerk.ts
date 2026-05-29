@@ -1,6 +1,5 @@
-import { computed } from 'vue'
-import { useClerk } from '@clerk/nuxt/composables'
 import type { AuthProvider } from './types'
+import { positiveApiResponse, negativeApiResponse, toApiError } from "@ipa-schema/api"
 import type { AuthUser, AuthResult } from '#shared/types/auth'
 
 function toUser(u: any): AuthUser | null {
@@ -15,33 +14,31 @@ function toUser(u: any): AuthUser | null {
 }
 
 function toResult(result: any): AuthResult {
-  if (result?.status) return { success: true as const }
-  return {
-    success: false as const,
-    error: result?.errors?.[0]?.message ?? 'Unknown error',
-  }
+  if (result?.status) return positiveApiResponse({})
+  return negativeApiResponse(toApiError(result?.errors?.[0] ?? 'Unknown error'))
 }
 
-let clerkRef: any = null
-
-function getClerk() {
-  if (!clerkRef) {
-    const nuxtApp = useNuxtApp()
-    clerkRef = nuxtApp.vueApp.runWithContext(() => useClerk())
-  }
-  return clerkRef?.value
+function initComposable<T>(fn: () => T): T {
+  const nuxtApp = useNuxtApp()
+  return nuxtApp.vueApp.runWithContext(fn)
 }
 
 export async function createClerkProvider(): Promise<AuthProvider> {
+  const { useClerk, useAuth, useUser } = await import('@clerk/nuxt/composables')
+
+  const { isSignedIn, isLoaded, signOut } = initComposable(() => useAuth())
+  const { user } = initComposable(() => useUser())
+  const clerkRef = initComposable(() => useClerk())
+
   return {
     id: 'clerk',
-    user: computed(() => toUser(getClerk()?.user)),
-    isLoaded: computed(() => getClerk()?.loaded ?? false),
-    isSignedIn: computed(() => getClerk()?.session != null),
+    user: computed(() => toUser(user.value)),
+    isLoaded: computed(() => isLoaded.value),
+    isSignedIn: computed(() => isSignedIn.value ?? false),
 
     async signIn(data) {
       return toResult(
-        await getClerk()?.client?.signIn?.create({
+        await clerkRef.value?.client?.signIn?.create({
           identifier: data.email,
           password: data.password,
         }),
@@ -50,7 +47,7 @@ export async function createClerkProvider(): Promise<AuthProvider> {
 
     async signUp(data) {
       return toResult(
-        await getClerk()?.client?.signUp?.create({
+        await clerkRef.value?.client?.signUp?.create({
           emailAddress: data.email,
           password: data.password,
         }),
@@ -58,23 +55,23 @@ export async function createClerkProvider(): Promise<AuthProvider> {
     },
 
     async signOut() {
-      await getClerk()?.signOut()
+      await signOut.value()
     },
 
-    async signInWithOAuth(provider) {
-      await getClerk()?.openOAuth({ provider })
+    async signInWithOAuth(_provider) {
+      return clerkRef.value?.openSignIn()
     },
 
-    openSignIn() {
-      return getClerk()?.openSignIn({ mode: 'modal' })
+    async openSignIn() {
+      return clerkRef.value?.openSignIn()
     },
 
-    openSignUp() {
-      return getClerk()?.openSignUp({ mode: 'modal' })
+    async openSignUp() {
+      return clerkRef.value?.openSignUp()
     },
 
-    openUserProfile() {
-      return getClerk()?.openUserProfile()
+    async openUserProfile() {
+      return clerkRef.value?.openUserProfile()
     },
   }
 }

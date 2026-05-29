@@ -1,6 +1,7 @@
 import { createBrowserClient } from '@supabase/ssr'
 import type { Provider } from '@supabase/supabase-js'
 import type { AuthProvider } from './types'
+import { positiveApiResponse, negativeApiResponse, toApiError } from "@ipa-schema/api"
 import type { AuthUser, AuthResult, AuthSignInData, AuthSignUpData } from '#shared/types/auth'
 
 export function toUser(sbUser: any): AuthUser | null {
@@ -50,8 +51,8 @@ export function createSupabaseProvider(): AuthProvider {
         email: data.email,
         password: data.password,
       })
-      if (error) return { success: false, error: error.message }
-      return { success: true }
+      if (error) return negativeApiResponse(toApiError(error))
+      return positiveApiResponse({})
     },
 
     async signUp(data: AuthSignUpData): Promise<AuthResult> {
@@ -60,8 +61,8 @@ export function createSupabaseProvider(): AuthProvider {
         password: data.password,
         options: { data: { name: data.name } },
       })
-      if (error) return { success: false, error: error.message }
-      return { success: true }
+      if (error) return negativeApiResponse(toApiError(error))
+      return positiveApiResponse({})
     },
 
     async signOut(): Promise<void> {

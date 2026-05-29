@@ -27,7 +27,7 @@ async function handleSignUp() {
   error.value = ''
   const result = await signUp({ name: name.value, email: email.value, password: password.value })
   if (!result.success) {
-    error.value = result.error
+    error.value = result.error?.message ?? ''
   }
   loading.value = false
 }

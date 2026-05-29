@@ -20,30 +20,14 @@ always use the latest version of Nuxt
 
 通过环境变量切换认证方式：
 
-```bash
-# clerk（默认）
-ENABLE_CLERK=1
-NUXT_PUBLIC_CLERK_PUBLISHABLE_KEY=xxx
-NUXT_CLERK_SECRET_KEY=xxx
-
-# better-auth
-ENABLE_BETTER_AUTH=1
-BETTER_AUTH_SECRET=xxx
-
-# supabase
-NUXT_PUBLIC_AUTH_PROVIDER=supabase
-NUXT_PUBLIC_SUPABASE_URL=http://localhost:54321
-NUXT_PUBLIC_SUPABASE_ANON_KEY=xxx
-```
-
 ## Database
 
 ### Prisma（默认）
 
 ```bash
-pnpm prisma:generate
-pnpm prisma:migrate
-pnpm prisma:studio
+pnpm run prisma:generate
+pnpm run prisma:migrate
+pnpm run prisma:studio
 ```
 
 ### Supabase（可选）
@@ -68,7 +52,7 @@ supabase migration new 描述
 ## Development
 
 ```bash
-pnpm dev
+pnpm run dev
 ```
 
 ## TODO

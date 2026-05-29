@@ -38,8 +38,7 @@ export default defineNuxtConfig({
   appConfig: {},
 
   build: {
-    // FIXME: not work
-    transpile: ["@ipa-schema/api"],
+    transpile: [],
   },
 
   css: ["@/assets/style/index.css"],
@@ -91,9 +90,6 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    ...(process.env.NUXT_PUBLIC_AUTH_PROVIDER === "clerk"
-      ? ["@clerk/nuxt"]
-      : []),
     "@nuxt/eslint",
     "@nuxt/icon",
     "@nuxt/image",
@@ -109,6 +105,16 @@ export default defineNuxtConfig({
       },
     ],
     "@unocss/nuxt",
+    ...(process.env.NUXT_PUBLIC_AUTH_PROVIDER === "clerk"
+      ? (() => {
+          try {
+            require.resolve("@clerk/nuxt");
+            return ["@clerk/nuxt"];
+          } catch {
+            return [];
+          }
+        })()
+      : []),
   ],
 
   i18n: {
