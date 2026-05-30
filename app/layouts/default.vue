@@ -41,6 +41,7 @@ import AuthUserButton from "~/components/auth/AuthUserButton.vue";
 import { useAuth } from "~/composables/useAuth";
 import { watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { isSafeRoute } from "#shared/utils/route";
 
 const provider = useAuth();
 const route = useRoute();
@@ -51,7 +52,7 @@ watch(
   ([loaded, signedIn]) => {
     if (!loaded) return;
 
-    if (signedIn && route.path === "/") {
+    if (signedIn && isSafeRoute(route.path)) {
       router.push("/dashboard");
       return;
     }
