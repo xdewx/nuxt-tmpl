@@ -1,0 +1,19 @@
+app/layouts/default.vue
+  s_b3fc53d392edfe::t_bc1b9947afa9ab 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.5",
+  "base_commit_sha": "bf7aca7fc059371a0609c5c93b87c148acd86122",
+  "prompts": {},
+  "sessions": {
+    "s_b3fc53d392edfe": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0e4952190ffeaHII0LBwAzhvPA",
+        "model": "unknown"
+      },
+      "human_author": "xdewx <present150608@sina.com>"
+    }
+  }
+}
