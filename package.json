@@ -27,7 +27,7 @@
   "dependencies": {
     "@clerk/nuxt": "^2.2.4",
     "@imengyu/vue3-context-menu": "^1.5.4",
-    "@ipa-schema/api": "^1.0.0",
+    "@ipa-schema/api": "^1.1.0",
     "@nuxt/icon": "^2.2.2",
     "@nuxt/image": "^2.0.0",
     "@prisma/adapter-better-sqlite3": "^7.8.0",

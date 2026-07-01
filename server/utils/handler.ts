@@ -23,8 +23,6 @@ export const defineApiHandler = <T extends EventHandlerRequest, D>(
         data: response,
       });
     } catch (err) {
-      return negativeApiResponse({
-        error: toApiError(err),
-      });
+      return negativeApiResponse(toApiError(err));
     }
   });
