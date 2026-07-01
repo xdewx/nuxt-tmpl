@@ -1,0 +1,21 @@
+package.json
+  s_88592bc1b27905::t_2c5e9f41da23b7 30
+pnpm-lock.yaml
+  s_88592bc1b27905::t_2f33b7477cf7cd 18-19,1434-1435,5875-5878,7809,7811,7813,7815,8418,13298-13302,13963-13964,13986
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.5",
+  "base_commit_sha": "7c1045d759abb5ec906f226fc30b2adea58ad56b",
+  "prompts": {},
+  "sessions": {
+    "s_88592bc1b27905": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0e4b375bdffeCEJSEV6c3unSJw",
+        "model": "unknown"
+      },
+      "human_author": "xdewx <present150608@sina.com>"
+    }
+  }
+}
