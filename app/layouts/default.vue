@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col w-full h-full">
-    <div class="border-b">
+    <div class="border-b border-b-solid" style="border-color: var(--el-border-color-light)">
       <div class="mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-10">
           <div class="flex-shrink-0">
