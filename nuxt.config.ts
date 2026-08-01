@@ -48,9 +48,6 @@ export default defineNuxtConfig({
       include: [
         'dayjs',
         'dayjs/plugin/*.js',
-        'lodash-unified',
-        '@vue/devtools-core',
-        '@vue/devtools-kit',
         '@imengyu/vue3-context-menu',
         '@supabase/ssr',
       ],
