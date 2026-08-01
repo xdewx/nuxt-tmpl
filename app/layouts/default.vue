@@ -35,37 +35,39 @@
 </template>
 
 <script setup lang="ts">
-import AuthSignInButton from "~/components/auth/AuthSignInButton.vue";
-import AuthSignUpButton from "~/components/auth/AuthSignUpButton.vue";
-import AuthUserButton from "~/components/auth/AuthUserButton.vue";
-import { useAuth } from "~/composables/useAuth";
-import { watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { isSafeRoute } from "#shared/utils/route";
+import { computed, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
-const provider = useAuth();
-const route = useRoute();
-const router = useRouter();
+const provider = useAuth()
+const route = useRoute()
+const router = useRouter()
+const config = useRuntimeConfig()
+const afterSignInRoute
+  = (config.public?.nuxtTmpl as any)?.afterSignInRoute ?? '/dashboard'
+const guestRoutes
+  = ((config.public as any)?.nuxtTmpl?.guestRoutes ?? []) as string[]
+const publicRoutes
+  = ((config.public as any)?.nuxtTmpl?.publicRoutes ?? []) as string[]
+
+const authMode = computed(() =>
+  getAuthMode(route.path, route.meta, guestRoutes, publicRoutes),
+)
 
 watch(
-  [() => provider.isLoaded.value, () => provider.isSignedIn.value],
-  ([loaded, signedIn]) => {
-    if (!loaded) return;
+  [() => provider.isLoaded.value, () => provider.isSignedIn.value, authMode],
+  ([loaded, signedIn, mode]) => {
+    if (!loaded || provider.id === 'none')
+      return
 
-    if (signedIn && isSafeRoute(route.path)) {
-      router.push("/dashboard");
-      return;
+    if (signedIn && mode === 'guest') {
+      router.push(afterSignInRoute)
+      return
     }
 
-    if (
-      !signedIn &&
-      route.path !== "/" &&
-      route.path !== "/sign-in" &&
-      route.path !== "/sign-up"
-    ) {
-      router.push("/");
+    if (!signedIn && mode === 'required') {
+      router.push('/')
     }
   },
   { immediate: true },
-);
+)
 </script>
