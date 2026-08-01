@@ -12,3 +12,4 @@ allowBuilds:
   vue-demi: true
 minimumReleaseAgeExclude:
   - vue-router@5.1.0
+  - '@nuxt-tmpl/nuxt@0.1.3'
