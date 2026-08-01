@@ -1,5 +1,11 @@
 packages:
   - "."
+  - "../nuxt-tmpl-mono/packages/*"
+  - "../../@ipa-schema/packages/*"
+  - "../../ipa-vue-mono/packages/*"
+overrides:
+  '@nuxt-tmpl/nuxt': workspace:*
+  '@nuxt-tmpl/core': workspace:*
 allowBuilds:
   better-sqlite3: true
   "@clerk/shared": true
@@ -13,3 +19,4 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - vue-router@5.1.0
   - '@nuxt-tmpl/nuxt@0.1.3'
+  - '@nuxt-tmpl/nuxt@0.1.4'
