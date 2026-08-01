@@ -15,6 +15,6 @@ export const auth = betterAuth({
     },
   },
   database: prismaAdapter(prisma, {
-    provider: 'sqlite',
+    provider: (process.env.DATABASE_PROVIDER as 'sqlite' | 'postgresql') || 'sqlite',
   }),
 })
