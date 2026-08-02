@@ -1,0 +1,19 @@
+prisma/index.ts
+  s_1e0356993ffae6::t_7a4c4d120dab1b 3,8-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.18",
+  "base_commit_sha": "bb6b3512dedb5837c6551e37f60c423694b77e91",
+  "prompts": {},
+  "sessions": {
+    "s_1e0356993ffae6": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_041a404c4ffed9RDtotiH37GP0",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "xdewx <present150608@sina.com>"
+    }
+  }
+}
