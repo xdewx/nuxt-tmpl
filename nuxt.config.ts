@@ -1,17 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import IconsResolver from "unplugin-icons/resolver";
-import ViteComponents from "unplugin-vue-components/vite";
+import IconsResolver from 'unplugin-icons/resolver'
+import ViteComponents from 'unplugin-vue-components/vite'
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   ssr: false,
+
   clerk: {
-    // signInUrl: "/sign-in",
-    // signUpUrl: "/sign-up",
     afterSignOutUrl: "/",
     signInForceRedirectUrl: "/dashboard",
     signInFallbackRedirectUrl: "/dashboard",
   },
+
   app: {},
 
   runtimeConfig: {
@@ -35,42 +36,18 @@ export default defineNuxtConfig({
     },
   },
 
-  appConfig: {},
-
-  build: {
-    transpile: [],
-  },
-
   css: ["@/assets/style/index.css"],
 
   nitro: {
-    externals: {},
-    ignore: [],
-    imports: {
-      exclude: [],
-    },
-    rollupConfig: {
-      plugins: [],
-    },
-  },
-
-  imports: {
-    scan: false,
-    presets: [],
-    dirs: [],
-  },
-
-  components: {
-    dirs: [],
-  },
-
-  router: {
-    options: {
-      hashMode: false,
+    externals: {
+      inline: ["@nuxt-tmpl/nuxt"],
     },
   },
 
   vite: {
+    resolve: {
+      conditions: ["development", "module", "browser", "import", "production"],
+    },
     plugins: [
       ViteComponents({
         resolvers: [IconsResolver({})],
@@ -80,9 +57,6 @@ export default defineNuxtConfig({
       include: [
         "dayjs",
         "dayjs/plugin/*.js",
-        "lodash-unified",
-        "@vue/devtools-core",
-        "@vue/devtools-kit",
         "@imengyu/vue3-context-menu",
         "@supabase/ssr",
       ],
@@ -115,6 +89,7 @@ export default defineNuxtConfig({
           }
         })()
       : []),
+    "@nuxt-tmpl/nuxt",
   ],
 
   i18n: {
@@ -133,8 +108,23 @@ export default defineNuxtConfig({
     ],
   },
 
+  nuxtTmpl: {
+    auth: {
+      enabled: true,
+      afterSignInRoute: "/dashboard",
+    },
+    translator: {
+      enabled: true,
+    },
+    apiResponse: {
+      enabled: true,
+    },
+    logging: {
+      enabled: false,
+    },
+  },
+
   eslint: {
     config: {},
   },
 });
-

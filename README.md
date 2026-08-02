@@ -1,68 +1,110 @@
 # Nuxt Template
 
-always use the latest version of Nuxt
+基于 `@nuxt-tmpl/core` 和 `@nuxt-tmpl/nuxt` 的 Nuxt 4 模板项目。
 
-## Features
+## 特性
 
-- i18n（国际化）
-- Pinia（状态管理）
-- Element Plus（UI 组件库）
-- UnoCSS（原子化 CSS）
-- ESLint（代码检查）
-- VueUse（组合式工具集）
-- unplugin-icons（图标自动引入）
-- vue3-context-menu（右键菜单）
-- Husky & commitlint（Git 提交规范）
-- Prisma + SQLite（数据库，可选 PostgreSQL）
-- Auth: Clerk / Better-Auth / Supabase（可选）
+- **认证系统**：支持 Clerk / Better-Auth / Supabase，通过环境变量切换
+- **数据库**：Prisma ORM，支持 SQLite / PostgreSQL
+- **UI 框架**：Element Plus
+- **原子化 CSS**：UnoCSS
+- **状态管理**：Pinia
+- **国际化**：i18n
+- **代码规范**：ESLint + Husky + commitlint
 
-## Auth
+## 快速开始
 
-通过环境变量切换认证方式：
-
-## Database
-
-### Prisma（默认）
+### 1. 安装依赖
 
 ```bash
-pnpm run prisma:generate
-pnpm run prisma:migrate
-pnpm run prisma:studio
+pnpm install
 ```
 
-### Supabase（可选）
+### 2. 配置环境变量
 
-搭配 Supabase CLI 使用，`scripts/supabase` 会自动从 `.env` 读取 `SUPABASE_DB_URL` 并注入 `PGSSLMODE=disable`：
+复制 `.env.example` 为 `.env`，根据需要修改配置。
+
+### 3. 初始化数据库
 
 ```bash
-# 推送迁移到本地数据库
-./scripts/supabase db push
+# 生成 Prisma Client
+pnpm prisma:generate
 
-# 创建新迁移文件
-supabase migration new 描述
-./scripts/supabase db push
+# 运行迁移
+pnpm prisma:migrate
 ```
 
-## Scripts
+### 4. 启动开发服务器
 
-| 脚本 | 用途 |
+```bash
+pnpm dev
+```
+
+## 认证配置
+
+通过环境变量 `NUXT_PUBLIC_AUTH_PROVIDER` 切换认证方式：
+
+| 值 | 说明 | 文档 |
+|---|---|---|
+| `clerk` | Clerk 认证 | [Clerk Docs](https://clerk.com/docs) |
+| `better-auth` | Better-Auth | [Better-Auth Docs](https://better-auth.com) |
+| `supabase` | Supabase Auth | [Supabase Docs](https://supabase.com/docs) |
+| 留空 | 禁用认证 | - |
+
+## 数据库配置
+
+默认使用 SQLite，如需切换到 PostgreSQL：
+
+1. 修改 `.env`：
+   ```env
+   DATABASE_PROVIDER=postgresql
+   DATABASE_URL=postgresql://user:password@host:5432/dbname
+   ```
+
+2. 重新运行迁移：
+   ```bash
+   pnpm prisma:migrate
+   ```
+
+## 部署
+
+### Vercel
+
+```bash
+pnpm vercel:deploy
+```
+
+### Docker
+
+```bash
+docker build -t nuxt-tmpl .
+docker run -p 3000:3000 nuxt-tmpl
+```
+
+### Supabase
+
+参考 [Supabase 部署文档](https://supabase.com/docs/guides/getting-started/quickstarts/nuxt)
+
+## 脚本
+
+| 脚本 | 说明 |
 |------|------|
-| `scripts/supabase` | Supabase CLI wrapper，自动注入 `--db-url` + `PGSSLMODE=disable`（绕过 bug #4839） |
+| `pnpm dev` | 启动开发服务器 |
+| `pnpm build` | 构建生产版本 |
+| `pnpm preview` | 预览生产版本 |
+| `pnpm lint` | 代码检查 |
+| `pnpm lint:fix` | 自动修复 |
+| `pnpm test` | 运行测试 |
+| `pnpm prisma:generate` | 生成 Prisma Client |
+| `pnpm prisma:migrate` | 运行数据库迁移 |
+| `pnpm prisma:studio` | 打开 Prisma Studio |
 
-## Development
+## 相关项目
 
-```bash
-pnpm run dev
-```
+- [@nuxt-tmpl/core](https://www.npmjs.com/package/@nuxt-tmpl/core) - 核心类型定义
+- [@nuxt-tmpl/nuxt](https://www.npmjs.com/package/@nuxt-tmpl/nuxt) - Nuxt 模块
+- [nuxt-tmpl-mono](https://github.com/your-repo/nuxt-tmpl-mono) - Monorepo 源码（私有）
 
-## TODO
+## License
 
-- [ ] global error handler at server side
-- [ ] [`@clerk/nuxt` not work under `hashMode`](https://github.com/clerk/javascript/issues/8357)
-- [ ] `afterSignOutUrl` & `signInForceRedirectUrl` not work
-
-## FAQ
-
-1. Could not locate the bindings file: better-sqlite3
-
-> `pnpm rebuild better-sqlite3`
+MIT
