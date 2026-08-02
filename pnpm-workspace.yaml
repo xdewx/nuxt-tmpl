@@ -1,26 +1,21 @@
 packages:
-    - "."
-    - "../nuxt-tmpl-mono/packages/*"
-    - "../../@ipa-schema/packages/*"
-    - "../../ipa-vue-mono/packages/*"
+  - "."
 overrides:
-    #'@nuxt-tmpl/nuxt': workspace:*
-    #'@nuxt-tmpl/core': workspace:*
-    "@nuxt-tmpl/nuxt": "0.1.6"
-    "@nuxt-tmpl/core": "0.0.4"
-    "@ipa-vue/core": "0.1.1"
-    "@ipa-vue/element-plus": "0.1.0"
+  "@nuxt-tmpl/nuxt": "0.1.6"
+  "@nuxt-tmpl/core": "0.0.4"
+  "@ipa-vue/core": "0.1.1"
+  "@ipa-vue/element-plus": "0.1.0"
 allowBuilds:
-    better-sqlite3: true
-    "@clerk/shared": true
-    "@parcel/watcher": true
-    "@prisma/engines": true
-    esbuild: true
-    prisma: true
-    sharp: true
-    unrs-resolver: true
-    vue-demi: true
+  "@clerk/shared": true
+  "@parcel/watcher": true
+  "@prisma/engines": true
+  better-sqlite3: set this to true or false
+  esbuild: true
+  prisma: true
+  sharp: true
+  unrs-resolver: true
+  vue-demi: true
 minimumReleaseAgeExclude:
-    - vue-router@5.1.0
-    - "@nuxt-tmpl/nuxt@0.1.6"
-    - "@ipa-vue/core@0.1.1"
+  - vue-router@5.1.0
+  - "@nuxt-tmpl/nuxt@0.1.6"
+  - "@ipa-vue/core@0.1.1"

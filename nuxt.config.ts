@@ -39,6 +39,7 @@ export default defineNuxtConfig({
   css: ["@/assets/style/index.css"],
 
   nitro: {
+    preset: "vercel",
     externals: {
       inline: ["@nuxt-tmpl/nuxt"],
     },

@@ -53,26 +53,27 @@ pnpm dev
 
 ## 数据库配置
 
-默认使用 SQLite，如需切换到 PostgreSQL：
+本分支默认使用 PostgreSQL（部署适配 Vercel）。在 Vercel 项目中配置：
 
-1. 修改 `.env`：
-   ```env
-   DATABASE_PROVIDER=postgresql
-   DATABASE_URL=postgresql://user:password@host:5432/dbname
-   ```
-
-2. 重新运行迁移：
-   ```bash
-   pnpm prisma:migrate
-   ```
+```env
+DATABASE_PROVIDER=postgresql
+DATABASE_URL=postgresql://user:password@host:5432/dbname
+BASE_URL=https://your-app.vercel.app
+BETTER_AUTH_SECRET=<your-secret>
+```
 
 ## 部署
 
-### Vercel
+### Vercel（本分支）
 
-```bash
-pnpm vercel:deploy
-```
+- `nuxt.config.ts` 已配置 `nitro.preset = "vercel"`，构建产出 `.vercel/output`。
+- 本地构建后使用 `--prebuilt` 部署：
+  ```bash
+  pnpm build
+  pnpm vercel:deploy --prebuilt
+  ```
+- 或直接推送 `vercel` 分支，Vercel 自动构建部署。
+- 需要在 Vercel 项目 Env 中配置上方数据库/认证相关环境变量。
 
 ### Docker
 
