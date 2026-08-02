@@ -35,3 +35,4 @@ data
 .vercel
 
 tmp
+.env*

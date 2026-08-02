@@ -45,7 +45,7 @@
     "vue-router": "^5.1.0"
   },
   "lint-staged": {
-    "*": "eslint --fix --no-warn-ignored"
+    "*.{js,ts,mjs,cjs,json,vue}": "eslint --fix --no-warn-ignored"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.5.0",
