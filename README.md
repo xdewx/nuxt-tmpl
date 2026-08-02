@@ -86,6 +86,10 @@ docker run -p 3000:3000 nuxt-tmpl
 
 参考 [Supabase 部署文档](https://supabase.com/docs/guides/getting-started/quickstarts/nuxt)
 
+### 待办：Supabase 数据库迁移
+
+生产已切换到 Supabase Auth，但业务表尚未创建。数据库迁移机制已选定 **Supabase CLI Migration** 方案（含 Prisma 对比分析），见 [docs/superpowers/specs/2026-08-02-supabase-db-migration-design.md](docs/superpowers/specs/2026-08-02-supabase-db-migration-design.md)。
+
 ## 脚本
 
 | 脚本 | 说明 |
