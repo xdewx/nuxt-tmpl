@@ -1,0 +1,33 @@
+.agents/skills/neon/SKILL.md
+  s_1e0356993ffae6::t_d16567cf8076a6 1-395
+.agents/skills/neon-postgres/SKILL.md
+  s_1e0356993ffae6::t_d16567cf8076a6 1-158
+.gitignore
+  s_1e0356993ffae6::t_3a26c71f20a561 37-38
+eslint.config.mjs
+  s_1e0356993ffae6::t_dff76f8c2adafd 4
+skills-lock.json
+  s_1e0356993ffae6::t_d16567cf8076a6 1-17
+package.json
+  s_1e0356993ffae6::t_9176501bd33f55 48
+.claude/skills/neon
+  s_1e0356993ffae6::t_d3269b6353bbaa 1
+.claude/skills/neon-postgres
+  s_1e0356993ffae6::t_723baf8526166d 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.18",
+  "base_commit_sha": "381fd9412996459db8275b383b51dc03282fdb02",
+  "prompts": {},
+  "sessions": {
+    "s_1e0356993ffae6": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_041a404c4ffed9RDtotiH37GP0",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "xdewx <present150608@sina.com>"
+    }
+  }
+}
