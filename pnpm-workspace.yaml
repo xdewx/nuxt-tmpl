@@ -1,9 +1,9 @@
 packages:
   - "."
 overrides:
-  "@nuxt-tmpl/nuxt": "0.1.6"
-  "@nuxt-tmpl/core": "0.0.4"
-  "@ipa-vue/core": "0.1.1"
+  "@nuxt-tmpl/nuxt": "0.2.0"
+  "@nuxt-tmpl/core": "0.2.0"
+  "@ipa-vue/core": "0.3.1"
   "@ipa-vue/element-plus": "0.1.0"
 allowBuilds:
   "@clerk/shared": true
@@ -17,5 +17,6 @@ allowBuilds:
   vue-demi: true
 minimumReleaseAgeExclude:
   - vue-router@5.1.0
-  - "@nuxt-tmpl/nuxt@0.1.6"
-  - "@ipa-vue/core@0.1.1"
+  - "@nuxt-tmpl/*"
+  - "@ipa-vue/*"
+  - "@ipa-schema/*"
