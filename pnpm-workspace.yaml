@@ -9,7 +9,6 @@ allowBuilds:
   "@clerk/shared": true
   "@parcel/watcher": true
   "@prisma/engines": true
-  better-sqlite3: set this to true or false
   esbuild: true
   prisma: true
   sharp: true

@@ -66,21 +66,14 @@ BETTER_AUTH_SECRET=<your-secret>
 
 ### Vercel（本分支）
 
-- `nuxt.config.ts` 已配置 `nitro.preset = "vercel"`，构建产出 `.vercel/output`。
+- Nitro 会根据 `VERCEL` 环境变量自动切换 vercel preset，构建产出 `.vercel/output`。
 - 本地构建后使用 `--prebuilt` 部署：
   ```bash
-  pnpm build
+  NITRO_PRESET=vercel pnpm build
   pnpm vercel:deploy --prebuilt
   ```
 - 或直接推送 `vercel` 分支，Vercel 自动构建部署。
 - 需要在 Vercel 项目 Env 中配置上方数据库/认证相关环境变量。
-
-### Docker
-
-```bash
-docker build -t nuxt-tmpl .
-docker run -p 3000:3000 nuxt-tmpl
-```
 
 ### Supabase
 

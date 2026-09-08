@@ -10,3 +10,8 @@ node_modules
 .env.*
 data
 prisma/generated
+Dockerfile
+docs
+.agents
+.claude
+skills-lock.json
